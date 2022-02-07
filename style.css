@@ -39,6 +39,13 @@ input {
     background: transparent;
     border: none;
     border-bottom: 2px solid rgba(94, 104, 121, 0.3);
+    outline: none;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #dde1e7  inset !important;
 }
 
 button {
