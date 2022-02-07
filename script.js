@@ -3,27 +3,30 @@
 
 const input = document.querySelector("input"),
   button = document.querySelector("button"),
-  capital = document.querySelector(".capital h3"),
-  flag = document.querySelector(".right"),
-  population = document.querySelector(".population h3"),
-  region = document.querySelector(".region h3"),
-  currency = document.querySelector(".currency h3"),
-  img = document.querySelector("img");
+  Capital = document.querySelector(".capital h3"),
+  Flag = document.querySelector(".right"),
+  Population = document.querySelector(".population h3"),
+  Region = document.querySelector(".region h3"),
+  Currency = document.querySelector(".currency h3"),
+  Img = document.querySelector("img");
 
-
-button.addEventListener("click", function() {
+button.addEventListener("click", function(e) {
+  e.preventDefault();
   fetch(`https://restcountries.com/v3.1/name/${input.value}`)
     .then(response => response.json())
     .then(data => {
-      capital.textContent = data[0].capital;
-      population.textContent = data[0].population;
-      region.textContent = data[0].region;
-      flag.style.backgroundImage = data[0].coatOfArms.png;
-      img.src = data[0].coatOfArms.png;
+      const { capital, population, region, coatOfArms, currencies } = data[0]
+      Capital.textContent = capital;
+      Population.textContent = population;
+      Region.textContent = region;
+      Flag.style.backgroundImage = coatOfArms.png;
+      Img.src = coatOfArms.png;
 
-      for(let key in data[0].currencies) {
-        currency.textContent = `${key} ${data[0].currencies[key].symbol}`;
+      for(let key in currencies) {
+        Currency.textContent = `${key} ${currencies[key].symbol}`;
       }
+
+      console.log(data);
 
     })
 });
